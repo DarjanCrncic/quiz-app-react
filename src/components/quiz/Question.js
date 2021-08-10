@@ -25,37 +25,21 @@ function Question(props) {
   const question = props.question;
 
   return (
-    <Grid
-      container
-      spacing={3}
-      className={classes.container}
-      align-items-xs-center
-    >
+    <Grid container spacing={3} className={classes.container}>
       <Grid item xs={12}>
         <Paper className={classes.paper}>
           <Typography variant="h5">{question.question}</Typography>
         </Paper>
       </Grid>
-      <Grid item xs={12} sm={6}>
-        <Button variant="outlined" className={classes.answer}>
-          <Typography variant="h5"> {question.correct_answer}</Typography>
-        </Button>
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <Button variant="outlined" className={classes.answer}>
-          <Typography variant="h5"> {question.incorrect_answers[0]}</Typography>
-        </Button>
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <Button variant="outlined" className={classes.answer}>
-          <Typography variant="h5"> {question.incorrect_answers[1]}</Typography>
-        </Button>
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <Button variant="outlined" className={classes.answer}>
-          <Typography variant="h5"> {question.incorrect_answers[2]}</Typography>
-        </Button>
-      </Grid>
+      {question.answers.map((answer) => {
+        return (
+          <Grid item xs={12} sm={6} key={answer.id}>
+            <Button variant="outlined" className={classes.answer}>
+              <Typography variant="h5"> {answer.answer}</Typography>
+            </Button>
+          </Grid>
+        );
+      })}
     </Grid>
   );
 }

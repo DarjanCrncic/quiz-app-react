@@ -1,6 +1,8 @@
 import { makeStyles } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import Question from "../quiz/Question";
+import { useDispatch, useSelector } from "react-redux";
+import { getQuiz } from "../../store/quiz-slice";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -38,9 +40,17 @@ const questions = [
 
 const Quizzes = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getQuiz());
+  }, [dispatch]);
+  
+  const quizReducer = useSelector((state) => state.quizReducer);
+  console.log(quizReducer.quiz, quizReducer.status)
   return (
     <div>
-      <Question question={questions[0]}></Question>
+      {quizReducer.status === "success" && <Question question={quizReducer.quiz.questions[0]}></Question>}
     </div>
   );
 };
