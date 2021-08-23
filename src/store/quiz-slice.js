@@ -2,19 +2,43 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getQuiz = createAsyncThunk("quiz/getQuiz", async () => {
-  console.log("should dispatch");
+  console.log("getting new quiz...");
   return axios.get("/quiz/").then((response) => response.data);
 });
 
+export const submitUserAnswers = createAsyncThunk("quiz/submitUserAnswers",
+  async (data, {getState, dispatch}) => {
+    return axios.post("/quiz/", getState().quizReducer.quiz).then((response) => response.status);
+  }
+);
+
 const quizSlice = createSlice({
   name: "quiz",
-  initialState: { quiz: null, status: null, currentQuestion: 0 },
+  initialState: {
+    quiz: null,
+    status: null,
+    currentQuestion: 0,
+    ongoing: false,
+  },
   reducers: {
     submitAnswer(state, action) {
-      if (state.currentQuestion < state.quiz.questions.length - 1) {
-        state.quiz.questions[state.currentQuestion].user_answer = action.payload.answerId;
-        state.currentQuestion++;
+      if (state.ongoing) {
+        state.quiz.questions[state.currentQuestion].user_answer =
+          action.payload.answerId;
+        if (state.currentQuestion < state.quiz.questions.length - 1) {
+          state.currentQuestion++;
+        } else {
+          state.ongoing = false;
+          state.status = "finished";
+        }
       }
+    },
+    startQuiz(state) {
+      state.ongoing = true;
+    },
+    stopQuiz(state) {
+      state.ongoing = false;
+      state.status = "finished";
     },
   },
   extraReducers: {
@@ -23,7 +47,9 @@ const quizSlice = createSlice({
     },
     [getQuiz.fulfilled]: (state, { payload }) => {
       state.quiz = payload;
-      state.status = "success";
+      state.status = "playing";
+      state.ongoing = true;
+      state.currentQuestion = 0;
     },
     [getQuiz.rejected]: (state, action) => {
       state.status = "failed";

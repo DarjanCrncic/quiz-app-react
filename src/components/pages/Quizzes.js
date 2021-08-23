@@ -1,25 +1,23 @@
+import { Container, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
-import React, { useEffect } from "react";
-import Question from "../quiz/Question";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { getQuiz } from "../../store/quiz-slice";
+import UserQuizTable from "../quiz/UserQuizTable";
 
 const useStyles = makeStyles((theme) => ({}));
 
 const Quizzes = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getQuiz());
-  }, [dispatch]);
-  
-  const quizReducer = useSelector((state) => state.quizReducer);
-  console.log(quizReducer)
   return (
-    <div>
-      {quizReducer.status === "success" && <Question question={quizReducer.quiz.questions[quizReducer.currentQuestion]}></Question>}
-    </div>
+    <Container>
+      <Link to="/quizzes/playing" onClick={() => dispatch(getQuiz())}>
+        <Typography variant="h6">Start New</Typography>
+      </Link>
+      <UserQuizTable />
+    </Container>
   );
 };
 
