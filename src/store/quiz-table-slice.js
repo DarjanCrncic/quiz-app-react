@@ -6,9 +6,20 @@ export const getQuizzes = createAsyncThunk(
   async (data, { getState }) => {
     const per_page = getState().quizzesTableReducer.perPage;
     const page = getState().quizzesTableReducer.page;
-    console.log("should get")
+    const order = getState().quizzesTableReducer.sortModel[0].field;
+    const orderBy = getState().quizzesTableReducer.sortModel[0].sort;
+    console.log("should get");
     return axios
-      .get("/quiz/users/1?per_page=" + per_page + "&page=" + page)
+      .get(
+        "/quiz/users/1?per_page=" +
+          per_page +
+          "&page=" +
+          page +
+          "&order=" +
+          order +
+          "&order_by=" +
+          orderBy
+      )
       .then((response) => response.data);
   }
 );
@@ -17,21 +28,30 @@ const quizTableSlice = createSlice({
   name: "quizTable",
   initialState: {
     rows: [],
+    totalCount: 0,
     status: null,
     page: 0,
     perPage: 5,
+    sortModel: [{field: "id", sort: "asc"}]
   },
   reducers: {
-    submitAnswer(state, action) {
-      
+    changePage(state, action) {
+      state.page = action.payload;
     },
+    changePageSize(state, action) {
+      state.perPage = action.payload;
+    },
+    changeFilterModel(state, action) {
+      state.sortModel = action.payload;
+    }
   },
   extraReducers: {
     [getQuizzes.pending]: (state, action) => {
       state.status = "loading";
     },
     [getQuizzes.fulfilled]: (state, { payload }) => {
-      state.rows = payload;
+      state.rows = payload.rows;
+      state.totalCount = payload.total;
       state.status = "success";
     },
     [getQuizzes.rejected]: (state, action) => {
