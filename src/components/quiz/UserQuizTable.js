@@ -39,11 +39,11 @@ const columns = [
 
 const UserQuizTable = () => {
   const dispatch = useDispatch();
-  const quizzesTableReducer = useSelector((state) => state.quizzesTableReducer);
+  const quizTableReducer = useSelector((state) => state.quizTableReducer);
 
   useEffect(() => {
     dispatch(getQuizzes());
-  }, [dispatch, quizzesTableReducer.page, quizzesTableReducer.perPage, quizzesTableReducer.sortModel]);
+  }, [dispatch, quizTableReducer.page, quizTableReducer.perPage, quizTableReducer.sortModel]);
 
   const handlePageChange = (newPage) => {
     dispatch(quizTableActions.changePage(newPage));
@@ -60,18 +60,18 @@ const UserQuizTable = () => {
   return (
     <div style={{ height: 370, width: "100%" }}>
       <DataGrid
-        rows={quizzesTableReducer.rows}
+        rows={quizTableReducer.rows}
         columns={columns}
-        rowCount={quizzesTableReducer.totalCount}
+        rowCount={quizTableReducer.totalCount}
         rowsPerPageOptions={[5, 10, 25, 50]}
         pagination
         paginationMode="server"
-        page={quizzesTableReducer.page}
+        page={quizTableReducer.page}
         onPageChange={(newPage) => handlePageChange(newPage)}
-        pageSize={quizzesTableReducer.perPage}
+        pageSize={quizTableReducer.perPage}
         onPageSizeChange={(newPageSize) => handlePageSizeChange(newPageSize)}
         sortingMode="server"
-        sortModel={quizzesTableReducer.sortModel}
+        sortModel={quizTableReducer.sortModel}
         onSortModelChange={handleSortModelChange}
       />
     </div>

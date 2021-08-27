@@ -7,7 +7,7 @@ const store = configureStore({
   reducer: {
     quizReducer: quizSlice.reducer,
     authReducer: authSlice.reducer,
-    quizzesTableReducer: quizTableSlice.reducer,
+    quizTableReducer: quizTableSlice.reducer,
   },
 });
 

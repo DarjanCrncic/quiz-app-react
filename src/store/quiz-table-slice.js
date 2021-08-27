@@ -4,10 +4,10 @@ import axios from "axios";
 export const getQuizzes = createAsyncThunk(
   "quiz/getQuizzes",
   async (data, { getState }) => {
-    const per_page = getState().quizzesTableReducer.perPage;
-    const page = getState().quizzesTableReducer.page;
-    const order = getState().quizzesTableReducer.sortModel[0].field;
-    const orderBy = getState().quizzesTableReducer.sortModel[0].sort;
+    const per_page = getState().quizTableReducer.perPage;
+    const page = getState().quizTableReducer.page;
+    const order = getState().quizTableReducer.sortModel[0].field;
+    const orderBy = getState().quizTableReducer.sortModel[0].sort;
     console.log("should get");
     return axios
       .get(

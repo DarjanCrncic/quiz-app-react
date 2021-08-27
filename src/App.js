@@ -7,11 +7,8 @@ import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 
 const theme = createTheme({
   overrides: {
-    // Style sheet name ⚛️
     MuiCircularProgress: {
-      // Name of the rule
       root: {
-        // Some CSS
         position: "absolute",
         left: "50%",
         top: "50%",

@@ -2,12 +2,12 @@ import { CircularProgress, makeStyles } from "@material-ui/core";
 import React, { useEffect } from "react";
 import Question from "../quiz/Question";
 import { useDispatch, useSelector } from "react-redux";
-import { getQuiz, submitUserAnswers } from "../../store/quiz-slice";
+import { submitUserAnswers } from "../../store/quiz-slice";
 import CustomCountdown from "../quiz/CustomCountdown";
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
-  
+
 }));
 
 const PlayingQuiz = () => {
@@ -18,7 +18,6 @@ const PlayingQuiz = () => {
   useEffect(() => {
     if (quizReducer.ongoing === false && quizReducer.status === "finished") {
       dispatch(submitUserAnswers());
-      //history.push("/quizzes")
       history.goBack();
     }
   }, [quizReducer.ongoing, dispatch, quizReducer.status, history]);
