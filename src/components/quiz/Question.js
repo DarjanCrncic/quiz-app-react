@@ -30,8 +30,10 @@ function Question(props) {
   const quizReducer = useSelector((state) => state.quizReducer);
 
   const handleAnswerClick = (answerId) => {
-    dispatch(quizActions.submitAnswer({questionId: question.id, answerId: answerId}));
-  }
+    dispatch(
+      quizActions.submitAnswer({ questionId: question.id, answerId: answerId })
+    );
+  };
 
   return (
     <Grid container spacing={3} className={classes.container}>
@@ -43,7 +45,11 @@ function Question(props) {
       {question.answers.map((answer) => {
         return (
           <Grid item xs={12} sm={6} key={answer.id}>
-            <Button variant="outlined" className={classes.answer} onClick={() => handleAnswerClick(answer.id)}>
+            <Button
+              variant="outlined"
+              className={classes.answer}
+              onClick={() => handleAnswerClick(answer.id)}
+            >
               <Typography variant="h5"> {answer.answer}</Typography>
             </Button>
           </Grid>

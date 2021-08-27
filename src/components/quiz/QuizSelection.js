@@ -45,7 +45,11 @@ const QuizSelection = () => {
 
   const handleStartQuizClick = () => {
     if (quizReducer.status !== "playing") {
-      dispatch(getQuiz());
+      dispatch(getQuiz({
+          difficulty: difficulty,
+          category: category,
+          questionNumber: questionNumber
+      }));
       history.push("/quizzes/playing");
     }
   };
@@ -70,7 +74,6 @@ const QuizSelection = () => {
             id: "outlined-difficulty-native-simple",
           }}
         >
-          <option value={"any"}>Any</option>
           <option value={"easy"}>Easy</option>
           <option value={"medium"}>Medium</option>
           <option value={"hard"}>Hard</option>

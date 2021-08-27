@@ -4,6 +4,15 @@ import { getQuizzes } from "../../store/quiz-table-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { quizTableActions } from "../../store/store";
 
+const days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 
 const columns = [
   { field: "id", headerName: "ID", width: 100, filterable: false },
@@ -22,11 +31,27 @@ const columns = [
     filterable: false,
   },
   {
-    field: "type",
-    headerName: "Type",
+    field: "creation_time",
+    headerName: "Played at",
     flex: 1,
     editable: false,
     filterable: false,
+    valueFormatter: (params) => {
+      const valueFormatted = new Date(params.value);
+      return (
+        days[valueFormatted.getDay()] +
+        ", " +
+        valueFormatted.getDate() +
+        "." +
+        valueFormatted.getMonth() +
+        "." +
+        valueFormatted.getFullYear() +
+        ". " +
+        valueFormatted.getHours() +
+        ":" +
+        valueFormatted.getMinutes()
+      );
+    },
   },
   {
     field: "result",
@@ -34,6 +59,10 @@ const columns = [
     flex: 1,
     editable: false,
     filterable: false,
+    valueFormatter: (params) => {
+      const valueFormatted = Number(params.value * 100).toLocaleString();
+      return `${valueFormatted} %`;
+    },
   },
 ];
 
@@ -43,7 +72,12 @@ const UserQuizTable = () => {
 
   useEffect(() => {
     dispatch(getQuizzes());
-  }, [dispatch, quizTableReducer.page, quizTableReducer.perPage, quizTableReducer.sortModel]);
+  }, [
+    dispatch,
+    quizTableReducer.page,
+    quizTableReducer.perPage,
+    quizTableReducer.sortModel,
+  ]);
 
   const handlePageChange = (newPage) => {
     dispatch(quizTableActions.changePage(newPage));
@@ -54,6 +88,7 @@ const UserQuizTable = () => {
   };
 
   const handleSortModelChange = (sortModel) => {
+    console.log(sortModel)
     dispatch(quizTableActions.changeFilterModel(sortModel));
   };
 

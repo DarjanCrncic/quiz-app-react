@@ -1,9 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getQuiz = createAsyncThunk("quiz/getQuiz", async () => {
+export const getQuiz = createAsyncThunk("quiz/getQuiz", async (data) => {
   console.log("getting new quiz...");
-  return axios.get("/quiz/").then((response) => response.data);
+  return axios.get("/quiz/", {params: {
+    category: data.category,
+    difficulty: data.difficulty,
+    amount: data.questionNumber
+  }}).then((response) => response.data);
 });
 
 export const submitUserAnswers = createAsyncThunk("quiz/submitUserAnswers",
