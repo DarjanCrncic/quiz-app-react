@@ -37,11 +37,18 @@ const QuizSelection = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-  const quizReducer = useSelector(state => state.quizReducer);
+  const quizReducer = useSelector((state) => state.quizReducer);
 
   const [difficulty, setDifficulty] = useState();
   const [category, setCategory] = useState();
   const [questionNumber, setQuestionNumber] = useState();
+
+  const handleStartQuizClick = () => {
+    if (quizReducer.status !== "playing") {
+      dispatch(getQuiz());
+      history.push("/quizzes/playing");
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -88,7 +95,11 @@ const QuizSelection = () => {
           }}
         >
           {categoryList.map((cat) => {
-            return <option key={cat.id} value={cat.id}>{cat.name}</option>;
+            return (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
+              </option>
+            );
           })}
         </Select>
       </FormControl>
@@ -118,13 +129,11 @@ const QuizSelection = () => {
       </FormControl>
       <FormControl className={classes.formControl} margin="dense">
         <Button
-          onClick={() => {
-            dispatch(getQuiz());
-            history.push("/quizzes/playing");
-          }}
+          onClick={handleStartQuizClick}
           variant="contained"
           color="primary"
           className={classes.buttonLink}
+          disabled={quizReducer.status === "playing" ? true : false}
         >
           <Typography variant="h6" component="div">
             Start New

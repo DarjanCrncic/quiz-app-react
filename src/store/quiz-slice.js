@@ -19,6 +19,7 @@ const quizSlice = createSlice({
     status: null,
     currentQuestion: 0,
     ongoing: false,
+    timer: 0
   },
   reducers: {
     submitAnswer(state, action) {
@@ -30,6 +31,7 @@ const quizSlice = createSlice({
         } else {
           state.ongoing = false;
           state.status = "finished";
+          state.timer = 0;
         }
       }
     },
@@ -39,6 +41,7 @@ const quizSlice = createSlice({
     stopQuiz(state) {
       state.ongoing = false;
       state.status = "finished";
+      state.timer = 0;
     },
   },
   extraReducers: {
@@ -50,6 +53,7 @@ const quizSlice = createSlice({
       state.status = "playing";
       state.ongoing = true;
       state.currentQuestion = 0;
+      state.timer = Date.now() + 60000;
     },
     [getQuiz.rejected]: (state, action) => {
       state.status = "failed";
