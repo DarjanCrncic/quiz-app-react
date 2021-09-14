@@ -1,8 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
-export const authSlice = createSlice({
+export const checkLogin = createAsyncThunk("auth/checkLogin", async (data) => {
+  console.log("checking logging in...");
+  return axios.get("/users/authenticated");
+});
+
+const authSlice = createSlice({
   name: "auth",
-  initialState: { authenticated: false },
+  initialState: { authenticated: false, status: null, principal: null },
   reducers: {
     login(state) {
       state.authenticated = true;
@@ -11,4 +17,21 @@ export const authSlice = createSlice({
       state.authenticated = false;
     },
   },
+  extraReducers: {
+    [checkLogin.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [checkLogin.fulfilled]: (state, { payload }) => {
+      state.principal = payload;
+      state.status = "authenticated";
+      state.authenticated = true;
+    },
+    [checkLogin.rejected]: (state, action) => {
+      state.principal = null;
+      state.authenticated = false;
+      state.status = "failed";
+    },
+  },
 });
+
+export default authSlice;

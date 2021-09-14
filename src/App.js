@@ -4,6 +4,9 @@ import Home from "./components/pages/Home";
 import Quizzes from "./components/pages/Quizzes";
 import PlayingQuiz from "./components/quiz/PlayingQuiz";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { checkLogin } from "./store/auth-slice";
 
 const theme = createTheme({
   overrides: {
@@ -21,6 +24,14 @@ const theme = createTheme({
 });
 
 function App() {
+
+  const dispatch = useDispatch();
+  const authReducer = useSelector((state) => state.authReducer);
+
+  useEffect(() => {
+    dispatch(checkLogin());
+  }, []);
+
   return (
     <div>
       <ThemeProvider theme={theme}>
@@ -34,16 +45,16 @@ function App() {
             path="/home"
             render={(props) => <Home {...props} />}
           ></Route>
-          <Route
+          {authReducer.authenticated && <Route
             exact
             path="/quizzes"
             render={(props) => <Quizzes {...props} />}
-          ></Route>
-          <Route
+          ></Route>}
+          {authReducer.authenticated && <Route
             exact
             path="/quizzes/playing"
             render={(props) => <PlayingQuiz {...props} />}
-          ></Route>
+          ></Route>}
         </Switch>
       </ThemeProvider>
     </div>

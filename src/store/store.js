@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authSlice } from "./auth-slice";
+import authSlice from "./auth-slice";
 import quizSlice from "./quiz-slice";
 import quizTableSlice from "./quiz-table-slice";
 

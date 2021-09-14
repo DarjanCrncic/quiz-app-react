@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   headerOptions: {
@@ -30,11 +31,15 @@ const useStyles = makeStyles((theme) => ({
 
 const HeaderButtons = (props) => {
   const classes = useStyles();
+  const authReducer = useSelector((state) => state.authReducer);
 
   return (
     <div className={classes.headerOptions}>
       {props.menuItems.map((menuItem) => {
         const { menuTitle, pageURL } = menuItem;
+        if (menuItem.needsAuth && !authReducer.authenticated) {
+          return "";
+        }
         return (
           <NavLink
             key={menuTitle}

@@ -5,6 +5,7 @@ import Menu from "@material-ui/core/Menu";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { menuItems } from "./menu-items";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -16,6 +17,7 @@ const MobileMenu = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const authReducer = useSelector((state) => state.authReducer);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -54,6 +56,10 @@ const MobileMenu = (props) => {
       >
         {menuItems.map((menuItem) => {
           const { menuTitle, pageURL } = menuItem;
+
+          if (menuItem.needsAuth && !authReducer.authenticated) {
+            return "";
+          }
           return (
             <MenuItem key={menuTitle} onClick={() => handleMenuClick(pageURL)}>
               {menuTitle}

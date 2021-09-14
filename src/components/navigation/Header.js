@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
     },
     fontSize: "1.6rem",
     "&:hover": {
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
 }));
 
@@ -35,22 +35,27 @@ const Header = (props) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
 
-
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.header}>
         <Toolbar>
-          <Typography variant="h6" className={classes.title} onClick={() => history.push("/")}>
+          <Typography
+            variant="h6"
+            className={classes.title}
+            onClick={() => history.push("/")}
+          >
             Quizzeees
           </Typography>
           {isMobile ? (
             <MobileMenu history={history} />
           ) : (
-            <HeaderButtons
-              menuItems={menuItems}
-            />
+            <HeaderButtons menuItems={menuItems} />
           )}
         </Toolbar>
+        <form action="http://localhost:8080/logout">
+          <button type="submit" >Logout</button>
+        </form>
+        <a href="http://localhost:8080/login">Login</a>
       </AppBar>
     </div>
   );
