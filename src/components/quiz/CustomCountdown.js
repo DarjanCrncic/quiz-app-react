@@ -2,7 +2,7 @@ import { Container, makeStyles, Paper } from "@material-ui/core";
 import React from "react";
 import Countdown from "react-countdown";
 import { useDispatch, useSelector } from "react-redux";
-import { quizActions } from "../../store/store";
+import { submitUserAnswers } from "../../store/quiz-slice";
 
 const useStyles = makeStyles((theme) => ({
   countdown: {
@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
 const CustomCountdown = React.memo(() => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const quizReducer = useSelector(state => state.quizReducer);
-  
+  const quizReducer = useSelector((state) => state.quizReducer);
+
   const renderer = ({ days, hours, minutes, seconds }) => {
     return (
       <Container className={classes.container}>
@@ -37,8 +37,8 @@ const CustomCountdown = React.memo(() => {
   };
 
   const handleCountdownCompleted = () => {
-    dispatch(quizActions.stopQuiz())
-  }
+    dispatch(submitUserAnswers());
+  };
 
   return (
     <Countdown

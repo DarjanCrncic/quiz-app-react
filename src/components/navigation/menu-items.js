@@ -9,5 +9,10 @@ export const menuItems = [
     pageURL: "/quizzes",
     needsAuth: true
   },
+  {
+    menuTitle: "Friends",
+    pageURL: "/friends",
+    needsAuth: true
+  },
 ];
 

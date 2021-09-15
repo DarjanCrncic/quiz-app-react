@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./auth-slice";
+import friendsSlice from "./friends-slice";
 import quizSlice from "./quiz-slice";
 import quizTableSlice from "./quiz-table-slice";
 
@@ -8,6 +9,7 @@ const store = configureStore({
     quizReducer: quizSlice.reducer,
     authReducer: authSlice.reducer,
     quizTableReducer: quizTableSlice.reducer,
+    friendsReducer: friendsSlice.reducer,
   },
 });
 

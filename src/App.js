@@ -7,6 +7,7 @@ import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { checkLogin } from "./store/auth-slice";
+import Friends from "./components/pages/Friends";
 
 const theme = createTheme({
   overrides: {
@@ -24,7 +25,6 @@ const theme = createTheme({
 });
 
 function App() {
-
   const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
 
@@ -45,16 +45,27 @@ function App() {
             path="/home"
             render={(props) => <Home {...props} />}
           ></Route>
-          {authReducer.authenticated && <Route
-            exact
-            path="/quizzes"
-            render={(props) => <Quizzes {...props} />}
-          ></Route>}
-          {authReducer.authenticated && <Route
-            exact
-            path="/quizzes/playing"
-            render={(props) => <PlayingQuiz {...props} />}
-          ></Route>}
+          {authReducer.authenticated ? (
+            <div>
+              <Route
+                exact
+                path="/quizzes"
+                render={(props) => <Quizzes {...props} />}
+              ></Route>
+              <Route
+                exact
+                path="/quizzes/playing"
+                render={(props) => <PlayingQuiz {...props} />}
+              ></Route>
+              <Route
+                exact
+                path="/friends"
+                render={(props) => <Friends {...props} />}
+              ></Route>
+            </div>
+          ) : (
+            <Redirect to="/home" />
+          )}
         </Switch>
       </ThemeProvider>
     </div>

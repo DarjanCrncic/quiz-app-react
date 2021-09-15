@@ -8,10 +8,11 @@ export const getQuizzes = createAsyncThunk(
     const page = getState().quizTableReducer.page;
     const order = getState().quizTableReducer.sortModel[0].field;
     const orderBy = getState().quizTableReducer.sortModel[0].sort;
+    const userId = getState().authReducer.principal.principal.id;
     console.log("should get");
     return axios
       .get(
-        "/quiz/users/1?per_page=" +
+        "/quiz/users/" + userId + "?per_page=" +
           per_page +
           "&page=" +
           page +

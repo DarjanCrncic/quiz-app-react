@@ -3,16 +3,24 @@ import axios from "axios";
 
 export const getQuiz = createAsyncThunk("quiz/getQuiz", async (data) => {
   console.log("getting new quiz...");
-  return axios.get("/quiz/", {params: {
-    category: data.category,
-    difficulty: data.difficulty,
-    amount: data.questionNumber
-  }}).then((response) => response.data);
+  return axios
+    .get("/quiz/", {
+      params: {
+        category: data.category,
+        difficulty: data.difficulty,
+        amount: data.questionNumber,
+      },
+    })
+    .then((response) => response.data);
 });
 
-export const submitUserAnswers = createAsyncThunk("quiz/submitUserAnswers",
-  async (data, {getState, dispatch}) => {
-    return axios.post("/quiz/", getState().quizReducer.quiz).then((response) => response.status);
+export const submitUserAnswers = createAsyncThunk(
+  "quiz/submitUserAnswers",
+  async (data, { getState }) => {
+    console.log("submitting answers...");
+    return axios
+      .post("/quiz/", getState().quizReducer.quiz)
+      .then((response) => response.status);
   }
 );
 
@@ -23,7 +31,7 @@ const quizSlice = createSlice({
     status: null,
     currentQuestion: 0,
     ongoing: false,
-    timer: 0
+    timer: 0,
   },
   reducers: {
     submitAnswer(state, action) {
@@ -61,6 +69,16 @@ const quizSlice = createSlice({
     },
     [getQuiz.rejected]: (state, action) => {
       state.status = "failed";
+    },
+    [submitUserAnswers.fulfilled]: (state) => {
+      state.ongoing = false;
+      state.status = "finished";
+      state.timer = 0;
+    },
+    [submitUserAnswers.rejected]: (state) => {
+      state.ongoing = false;
+      state.status = "finished";
+      state.timer = 0;
     },
   },
 });
