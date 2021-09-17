@@ -8,7 +8,12 @@ export const checkLogin = createAsyncThunk("auth/checkLogin", async (data) => {
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: { authenticated: false, status: null, principal: null },
+  initialState: {
+    authenticated: false,
+    status: null,
+    principal: null,
+    isLoading: true,
+  },
   reducers: {
     login(state) {
       state.authenticated = true;
@@ -20,15 +25,18 @@ const authSlice = createSlice({
   extraReducers: {
     [checkLogin.pending]: (state, action) => {
       state.status = "loading";
+      state.isLoading = true;
     },
     [checkLogin.fulfilled]: (state, { payload }) => {
       state.principal = payload;
       state.status = "authenticated";
       state.authenticated = true;
+      state.isLoading = false;
     },
     [checkLogin.rejected]: (state, action) => {
       state.principal = null;
       state.authenticated = false;
+      state.isLoading = false;
       state.status = "failed";
     },
   },

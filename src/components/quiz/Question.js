@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     width: "90%",
     textAlign: "center",
     margin: "auto",
+    minHeight: 300
   },
   answer: {
     padding: theme.spacing(2),
@@ -20,21 +21,54 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     textAlign: "center",
   },
+  correctAnswer: {
+    backgroundColor: "green",
+    "&:hover": {
+      backgroundColor: "green",
+    }
+  },
+  incorrectAnswer: {
+    backgroundColor: "red",
+    "&:hover": {
+      backgroundColor: "red",
+    }
+  },
 }));
 
 function Question(props) {
   const classes = useStyles();
   const question = props.question;
+  const viewing = props.viewing;
 
   const dispatch = useDispatch();
   const quizReducer = useSelector((state) => state.quizReducer);
 
   const handleAnswerClick = (answerId) => {
-    dispatch(
-      quizActions.submitAnswer({ questionId: question.id, answerId: answerId })
-    );
+    if (!viewing) {
+      dispatch(
+        quizActions.submitAnswer({
+          questionId: question.id,
+          answerId: answerId,
+        })
+      );
+    }
   };
 
+  const getAnswerClass = (answerId) => {
+    if (!viewing) {
+      return classes.answer;
+    }
+    if (+question.correct_answer_id !== +question.user_answer && +question.user_answer === +answerId) {
+      return classes.incorrectAnswer + " " + classes.answer;
+    }
+
+    if (+question.correct_answer_id  === +answerId) {
+      return classes.correctAnswer + " " + classes.answer;
+    }
+
+    return classes.answer;
+  }
+  
   return (
     <Grid container spacing={3} className={classes.container}>
       <Grid item xs={12}>
@@ -43,11 +77,12 @@ function Question(props) {
         </Paper>
       </Grid>
       {question.answers.map((answer) => {
+        const answerClass = getAnswerClass(answer.id);
         return (
-          <Grid item xs={12} sm={6} key={answer.id}>
+          <Grid item xs={12} sm={6} key={answer.id} >
             <Button
               variant="outlined"
-              className={classes.answer}
+              className={answerClass}
               onClick={() => handleAnswerClick(answer.id)}
             >
               <Typography variant="h5"> {answer.answer}</Typography>

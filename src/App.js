@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { checkLogin } from "./store/auth-slice";
 import Friends from "./components/pages/Friends";
+import ViewingQuiz from "./components/quiz/ViewingQuiz";
 
 const theme = createTheme({
   overrides: {
@@ -45,7 +46,7 @@ function App() {
             path="/home"
             render={(props) => <Home {...props} />}
           ></Route>
-          {authReducer.authenticated ? (
+          {(authReducer.authenticated || authReducer.isLoading) && (
             <div>
               <Route
                 exact
@@ -59,13 +60,19 @@ function App() {
               ></Route>
               <Route
                 exact
+                path="/quizzes/viewing"
+                render={(props) => <ViewingQuiz {...props} />}
+              ></Route>
+              <Route
+                exact
                 path="/friends"
                 render={(props) => <Friends {...props} />}
               ></Route>
             </div>
-          ) : (
-            <Redirect to="/home" />
           )}
+          <Route path="*">
+            <Redirect to="/home" />
+          </Route>
         </Switch>
       </ThemeProvider>
     </div>

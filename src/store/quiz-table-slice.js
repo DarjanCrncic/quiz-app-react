@@ -12,7 +12,9 @@ export const getQuizzes = createAsyncThunk(
     console.log("should get");
     return axios
       .get(
-        "/quiz/users/" + userId + "?per_page=" +
+        "/quiz/users/" +
+          userId +
+          "?per_page=" +
           per_page +
           "&page=" +
           page +
@@ -33,7 +35,7 @@ const quizTableSlice = createSlice({
     status: null,
     page: 0,
     perPage: 5,
-    sortModel: [{field: "id", sort: "asc"}]
+    sortModel: [{ field: "id", sort: "asc" }],
   },
   reducers: {
     changePage(state, action) {
@@ -44,7 +46,7 @@ const quizTableSlice = createSlice({
     },
     changeFilterModel(state, action) {
       state.sortModel = action.payload;
-    }
+    },
   },
   extraReducers: {
     [getQuizzes.pending]: (state, action) => {

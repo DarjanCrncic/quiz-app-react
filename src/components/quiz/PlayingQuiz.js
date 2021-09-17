@@ -28,6 +28,7 @@ const PlayingQuiz = () => {
           <CustomCountdown time={quizReducer.timeLeft} />
           <Question
             question={quizReducer.quiz.questions[quizReducer.currentQuestion]}
+            viewing={false}
           ></Question>
         </div>
       ) : <CircularProgress size={80}/>}

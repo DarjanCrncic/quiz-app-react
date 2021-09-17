@@ -1,8 +1,20 @@
 import React, { useEffect } from "react";
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid, GridOverlay } from "@material-ui/data-grid";
 import { getQuizzes } from "../../store/quiz-table-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { quizTableActions } from "../../store/store";
+import { Button, LinearProgress } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+
+function CustomLoadingOverlay() {
+  return (
+    <GridOverlay>
+      <div style={{ position: 'absolute', top: 0, width: '100%' }}>
+        <LinearProgress />
+      </div>
+    </GridOverlay>
+  );
+}
 
 const days = [
   "Sunday",
@@ -43,7 +55,7 @@ const columns = [
         ", " +
         valueFormatted.getDate() +
         "." +
-        valueFormatted.getMonth() +
+        (valueFormatted.getMonth() + 1) +
         "." +
         valueFormatted.getFullYear() +
         ". " +
@@ -64,11 +76,28 @@ const columns = [
       return `${valueFormatted} %`;
     },
   },
+  {
+    field: "actions",
+    headerName: "Actions",
+    flex: 0.5,
+    filterable: false,
+    sortable: false,
+    disableClickEventBubbling: true,
+    renderCell: (params) => {
+      return (
+        <Button variant="contained" color="primary">
+          Click
+        </Button>
+      );
+    },
+  },
 ];
 
 const UserQuizTable = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const quizTableReducer = useSelector((state) => state.quizTableReducer);
+  const authReducer = useSelector((state) => state.authReducer);
 
   useEffect(() => {
     dispatch(getQuizzes());
@@ -77,6 +106,7 @@ const UserQuizTable = () => {
     quizTableReducer.page,
     quizTableReducer.perPage,
     quizTableReducer.sortModel,
+    authReducer.authenticated,
   ]);
 
   const handlePageChange = (newPage) => {
@@ -88,8 +118,16 @@ const UserQuizTable = () => {
   };
 
   const handleSortModelChange = (sortModel) => {
-    console.log(sortModel)
+    console.log(sortModel);
     dispatch(quizTableActions.changeFilterModel(sortModel));
+  };
+
+  const currentlySelected = (params) => {
+    const field = params.colDef.field;
+
+    if (field === "actions") {
+      history.push({ pathname: "/quizzes/viewing", state: params.row });
+    }
   };
 
   return (
@@ -108,6 +146,11 @@ const UserQuizTable = () => {
         sortingMode="server"
         sortModel={quizTableReducer.sortModel}
         onSortModelChange={handleSortModelChange}
+        onCellClick={currentlySelected}
+        loading={quizTableReducer.status !== "success"}
+        components={{
+          LoadingOverlay: CustomLoadingOverlay,
+        }}
       />
     </div>
   );
