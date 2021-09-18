@@ -1,7 +1,44 @@
+import { makeStyles } from "@material-ui/core";
+import { Button, Container, Typography } from "@material-ui/core";
+import { Facebook } from "@material-ui/icons";
 import React from "react";
 
+const useStyles = makeStyles((theme) => ({
+  loginForm: {
+    textAlign: "center",
+    margin: 30,
+  },
+  loginButton: {
+    padding: 10,
+  },
+  facebookIcon: {
+    marginRight: 10,
+    fontSize: "3.5rem",
+  },
+}));
+
 const Home = () => {
-  return <div></div>;
+  const classes = useStyles();
+  return (
+    <Container>
+      <form
+        action={
+          process.env.REACT_APP_BACKEND_URL + "/oauth2/authorization/facebook"
+        }
+        className={classes.loginForm}
+      >
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className={classes.loginButton}
+        >
+          <Facebook className={classes.facebookIcon} />
+          <Typography variant="h4">Log In With Facebook</Typography>
+        </Button>
+      </form>
+    </Container>
+  );
 };
 
 export default Home;

@@ -4,30 +4,46 @@ import { Typography } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const useStyles = makeStyles((theme) => ({
-  headerOptions: {
-    display: "flex",
-    flex: 1,
-    justifyContent: "flex-end",
-    background: "transparent",
-  },
-  headerButton: {
-    marginLeft: 20,
-    marginRight: 20,
-    color: "inherit",
-    "&:hover": {
+const useStyles = makeStyles((theme) => {
+  console.log(theme);
+  return {
+    headerOptions: {
+      display: "flex",
+      flex: 1,
+      justifyContent: "flex-end",
+      background: "transparent",
+    },
+    headerButton: {
+      marginLeft: 20,
+      marginRight: 20,
+      color: "inherit",
+      "&:hover": {
+        transform: "scale(1.02) ",
+        color: "#eef",
+        cursor: "pointer",
+      },
+      textDecoration: "none",
+    },
+    active: {
       transform: "scale(1.02) ",
       color: "#eef",
-      cursor: "pointer",
+      textDecoration: "underline",
     },
-    textDecoration: "none",
-  },
-  active: {
-    transform: "scale(1.02) ",
-    color: "#eef",
-    textDecoration: "underline",
-  },
-}));
+    logoutButton: {
+      color: "white",
+      background: theme.palette.primary.main,
+      "&:hover": {
+        transform: "scale(1.02) ",
+        color: "#eef",
+        cursor: "pointer",
+      },
+      padding: "none",
+      border: "none",
+      marginTop: -1
+
+    },
+  };
+});
 
 const HeaderButtons = (props) => {
   const classes = useStyles();
@@ -51,6 +67,13 @@ const HeaderButtons = (props) => {
           </NavLink>
         );
       })}
+      {authReducer.authenticated && (
+        <form action={process.env.REACT_APP_BACKEND_URL + "/logout"}>
+          <button type="submit" className={classes.logoutButton}>
+            <Typography variant="h6">Logout</Typography>
+          </button>
+        </form>
+      )}
     </div>
   );
 };

@@ -52,10 +52,6 @@ const Header = (props) => {
             <HeaderButtons menuItems={menuItems} />
           )}
         </Toolbar>
-        <form action="http://localhost:8080/logout">
-          <button type="submit" >Logout</button>
-        </form>
-        <a href="http://localhost:8080/login">Login</a>
       </AppBar>
     </div>
   );
