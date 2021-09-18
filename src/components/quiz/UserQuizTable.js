@@ -131,7 +131,7 @@ const UserQuizTable = () => {
   };
 
   return (
-    <div style={{ height: 370, width: "100%" }}>
+    <div style={{ height: 370, width: "100%", marginTop: 10 }}>
       <DataGrid
         rows={quizTableReducer.rows}
         columns={columns}

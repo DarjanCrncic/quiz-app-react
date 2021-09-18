@@ -4,9 +4,10 @@ import { Facebook } from "@material-ui/icons";
 import React from "react";
 
 const useStyles = makeStyles((theme) => ({
-  loginForm: {
+  wrapper: {
     textAlign: "center",
     margin: 30,
+    color: theme.palette.primary.dark
   },
   loginButton: {
     padding: 10,
@@ -21,11 +22,14 @@ const Home = () => {
   const classes = useStyles();
   return (
     <Container>
+      <Typography variant="h2" className={classes.wrapper}>
+        Test Your Knowledge In The Ultimate Quiz Application!
+      </Typography>
       <form
         action={
           process.env.REACT_APP_BACKEND_URL + "/oauth2/authorization/facebook"
         }
-        className={classes.loginForm}
+        className={classes.wrapper}
       >
         <Button
           type="submit"
