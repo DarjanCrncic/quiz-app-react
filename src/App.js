@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { checkLogin } from "./store/auth-slice";
 import Friends from "./components/pages/Friends";
 import ViewingQuiz from "./components/quiz/ViewingQuiz";
+import "./body.css";
 
 const theme = createTheme({
   overrides: {
@@ -28,7 +29,7 @@ const theme = createTheme({
       light: "#FFC069",
       main: "#A45D5D",
       dark: "#4A403A",
-      contrastText: "#EFEFEF"
+      contrastText: "#EFEFEF",
     },
   },
 });
@@ -39,7 +40,7 @@ function App() {
 
   useEffect(() => {
     dispatch(checkLogin());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

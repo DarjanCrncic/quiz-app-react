@@ -18,7 +18,7 @@ const Friends = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getFriends());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container>

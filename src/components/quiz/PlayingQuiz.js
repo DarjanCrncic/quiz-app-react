@@ -1,4 +1,4 @@
-import { CircularProgress, makeStyles } from "@material-ui/core";
+import { CircularProgress } from "@material-ui/core";
 import React, { useEffect } from "react";
 import Question from "../quiz/Question";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,13 +6,8 @@ import { submitUserAnswers } from "../../store/quiz-slice";
 import CustomCountdown from "../quiz/CustomCountdown";
 import { useHistory } from "react-router";
 
-const useStyles = makeStyles((theme) => ({
-
-}));
-
 const PlayingQuiz = () => {
   const history = useHistory();
-  const classes = useStyles();
   const dispatch = useDispatch();
   const quizReducer = useSelector((state) => state.quizReducer);
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { Button, Grid, makeStyles, Paper, Typography } from "@material-ui/core";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { quizActions } from "../../store/store";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     margin: "auto",
     textAlign: "center",
+    backgroundColor: "white"
   },
   correctAnswer: {
     backgroundColor: "green",
@@ -43,7 +44,6 @@ function Question(props) {
   const viewing = props.viewing;
 
   const dispatch = useDispatch();
-  const quizReducer = useSelector((state) => state.quizReducer);
 
   const handleAnswerClick = (answerId) => {
     if (!viewing) {

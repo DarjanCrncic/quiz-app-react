@@ -5,11 +5,12 @@ const useStyles = makeStyles((theme) => ({
   introText: {
     textAlign: "center",
     margin: "30px 0px 30px 0px",
-    backgroundColor: theme.palette.primary.contrastText,
+    backgroundColor: "white",
     color: theme.palette.primary.dark,
     borderTop: "5px solid " + theme.palette.primary.dark,
-    borderBottom: "5px solid " + theme.palette.primary.dark,
+    borderBottom: "10px solid " + theme.palette.primary.dark,
     padding: 20,
+    paddingBottom: 30
   },
   borderTop: {
     marginTop: "5%",
