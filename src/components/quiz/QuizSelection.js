@@ -19,6 +19,10 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     marginTop: 10,
     marginBottom: 30,
+    border: "3px solid",
+    paddingBottom: 20,
+    paddingTop: 5,
+    borderColor: theme.palette.primary.light
   },
   formControl: {
     minWidth: 200,

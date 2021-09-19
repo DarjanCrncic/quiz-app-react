@@ -23,6 +23,14 @@ const theme = createTheme({
       },
     },
   },
+  palette: {
+    primary: {
+      light: "#FFC069",
+      main: "#A45D5D",
+      dark: "#4A403A",
+      contrastText: "#EFEFEF"
+    },
+  },
 });
 
 function App() {

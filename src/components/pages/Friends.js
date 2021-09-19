@@ -25,8 +25,8 @@ const Friends = () => {
       <List>
         {friendsReducer.friends.map((friend) => {
           return (
-            <Paper>
-              <ListItem key={friend.id}>
+            <Paper key={friend.id}>
+              <ListItem>
                 <ListItemAvatar>
                   <Avatar>
                     <img src={friend.picture.data.url} alt="" />

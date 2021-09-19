@@ -41,7 +41,7 @@ const ViewingQuiz = (params) => {
 
   return (
     <React.Fragment>
-      <Typography variant="h2" component="h2" className={classes.questionTitle}>
+      <Typography variant="h3" component="h2" className={classes.questionTitle}>
         {"Question " + (questionNumber + 1)}
       </Typography>
       <Question question={quiz.questions[questionNumber]} viewing={true} />
@@ -51,6 +51,7 @@ const ViewingQuiz = (params) => {
           onClick={handlePrevQuestion}
           className={classes.arrows}
           color="primary"
+          disabled={questionNumber === 0}
         >
           {"<"}
         </Button>
@@ -59,6 +60,7 @@ const ViewingQuiz = (params) => {
           onClick={handleNextQuestion}
           className={classes.arrows}
           color="primary"
+          disabled={questionNumber === quiz.questions.length - 1}
         >
           {">"}
         </Button>

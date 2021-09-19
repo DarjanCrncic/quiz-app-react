@@ -25,13 +25,15 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "green",
     "&:hover": {
       backgroundColor: "green",
-    }
+    },
+    color: theme.palette.primary.contrastText
   },
   incorrectAnswer: {
     backgroundColor: "red",
     "&:hover": {
       backgroundColor: "red",
-    }
+    },
+    color: theme.palette.primary.contrastText
   },
 }));
 
