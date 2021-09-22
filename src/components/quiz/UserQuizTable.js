@@ -3,13 +3,14 @@ import { DataGrid, GridOverlay } from "@material-ui/data-grid";
 import { getQuizzes } from "../../store/quiz-table-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { quizTableActions } from "../../store/store";
-import { Button, LinearProgress } from "@material-ui/core";
+import { IconButton, LinearProgress, Tooltip } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import { Search } from "@material-ui/icons";
 
 function CustomLoadingOverlay() {
   return (
     <GridOverlay>
-      <div style={{ position: 'absolute', top: 0, width: '100%' }}>
+      <div style={{ position: "absolute", top: 0, width: "100%" }}>
         <LinearProgress />
       </div>
     </GridOverlay>
@@ -85,9 +86,11 @@ const columns = [
     disableClickEventBubbling: true,
     renderCell: (params) => {
       return (
-        <Button variant="contained" color="primary">
-          Click
-        </Button>
+        <Tooltip title="See results">
+          <IconButton>
+            <Search />
+          </IconButton>
+        </Tooltip>
       );
     },
   },

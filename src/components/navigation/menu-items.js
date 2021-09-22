@@ -10,8 +10,8 @@ export const menuItems = [
     needsAuth: true
   },
   {
-    menuTitle: "Friends",
-    pageURL: "/friends",
+    menuTitle: "Statistics",
+    pageURL: "/statistics",
     needsAuth: true
   },
 ];

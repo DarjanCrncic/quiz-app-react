@@ -7,21 +7,37 @@ import {
   ListItemAvatar,
   ListItemSecondaryAction,
   ListItemText,
+  Tooltip,
+  makeStyles,
   Paper,
 } from "@material-ui/core";
+import { Search } from "@material-ui/icons";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFriends } from "../../store/friends-slice";
 
-const Friends = () => {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    border: "3px solid",
+    padding: "10px 20px 10px 20px",
+    marginTop: 10,
+    borderColor: theme.palette.primary.light,
+  },
+}));
+
+const FriendsList = () => {
+  const classes = useStyles();
   const friendsReducer = useSelector((state) => state.friendsReducer);
+  const authReducer = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getFriends());
-  }, [dispatch]);
+    if (authReducer.authenticated) {
+      dispatch(getFriends());
+    }
+  }, [dispatch, authReducer.authenticated]);
 
   return (
-    <Container>
+    <Container className={classes.root}>
       <List>
         {friendsReducer.friends.map((friend) => {
           return (
@@ -33,10 +49,15 @@ const Friends = () => {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText primary={friend.name} />
+                <ListItemText
+                  primary={"Average Score: " + friend.average_score}
+                />
                 <ListItemSecondaryAction>
-                  <IconButton edge="end" aria-label="delete">
-                    dadsa
-                  </IconButton>
+                  <Tooltip title="See statistics">
+                    <IconButton edge="end">
+                      <Search />
+                    </IconButton>
+                  </Tooltip>
                 </ListItemSecondaryAction>
               </ListItem>
             </Paper>
@@ -47,4 +68,4 @@ const Friends = () => {
   );
 };
 
-export default Friends;
+export default FriendsList;

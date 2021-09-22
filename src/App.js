@@ -7,7 +7,7 @@ import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { checkLogin } from "./store/auth-slice";
-import Friends from "./components/pages/Friends";
+import Statistics from "./components/pages/Statistics";
 import ViewingQuiz from "./components/quiz/ViewingQuiz";
 import "./body.css";
 
@@ -74,8 +74,8 @@ function App() {
               ></Route>
               <Route
                 exact
-                path="/friends"
-                render={(props) => <Friends {...props} />}
+                path="/statistics"
+                render={(props) => <Statistics {...props} />}
               ></Route>
             </div>
           )}

@@ -7,7 +7,7 @@ export const getFriends = createAsyncThunk("user/getFriends", async (data) => {
 });
 
 const friendsSlice = createSlice({
-  name: "auth",
+  name: "friends",
   initialState: { friends: [], status: null },
   reducers: {},
   extraReducers: {
@@ -15,7 +15,6 @@ const friendsSlice = createSlice({
       state.status = "loading";
     },
     [getFriends.fulfilled]: (state, { payload }) => {
-        console.log(payload.data)
       state.friends = payload.data;
       state.status = "success";
     },

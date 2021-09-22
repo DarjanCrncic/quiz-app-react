@@ -1,5 +1,6 @@
 import { Typography } from "@material-ui/core";
 import { Button, Container, makeStyles } from "@material-ui/core";
+import { ArrowLeft, ArrowRight } from "@material-ui/icons";
 import React, { useState } from "react";
 import Question from "./Question";
 
@@ -12,13 +13,16 @@ const useStyles = makeStyles((theme) => ({
   },
   arrows: {
     fontWeight: 600,
-    fontSize: "1.2rem",
+    fontSize: "2.2rem",
     color: "white",
-    margin: 5,
+  },
+  arrowButton: {
+    margin: 10,
+    padding: 0
   },
   questionTitle: {
-      textAlign: "center",
-      marginTop: 35
+    textAlign: "center",
+    marginTop: 35,
   },
 }));
 
@@ -49,20 +53,20 @@ const ViewingQuiz = (params) => {
         <Button
           variant="contained"
           onClick={handlePrevQuestion}
-          className={classes.arrows}
+          className={classes.arrowButton}
           color="primary"
           disabled={questionNumber === 0}
         >
-          {"<"}
+          <ArrowLeft className={classes.arrows} />
         </Button>
         <Button
           variant="contained"
           onClick={handleNextQuestion}
-          className={classes.arrows}
+          className={classes.arrowButton}
           color="primary"
           disabled={questionNumber === quiz.questions.length - 1}
         >
-          {">"}
+          <ArrowRight className={classes.arrows} />
         </Button>
       </Container>
     </React.Fragment>
