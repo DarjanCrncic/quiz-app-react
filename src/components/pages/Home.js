@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core";
 import { Button, Container, Typography } from "@material-ui/core";
 import { Facebook } from "@material-ui/icons";
 import React from "react";
-import HomePageIntro from "../quiz/HomePageIntro";
+import HomePageIntro from "../subcomponents/HomePageIntro";
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
