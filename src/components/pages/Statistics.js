@@ -6,8 +6,8 @@ import {
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getStats } from "../../store/user-stats-slice";
-import AvgPerCatList from "../quiz/AvgPerCatList";
-import PlayerStatsPieChart from "../quiz/PlayerStatsPieChart";
+import AvgPerCatList from "../various/AvgPerCatList";
+import PlayerStatsPieChart from "../various/PlayerStatsPieChart";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

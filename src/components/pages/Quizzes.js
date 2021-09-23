@@ -1,7 +1,7 @@
 import { Container, Typography, useTheme } from "@material-ui/core";
 import React from "react";
-import UserQuizTable from "../quiz/UserQuizTable";
-import QuizSelection from "../quiz/QuizSelection";
+import UserQuizTable from "../various/UserQuizTable";
+import QuizSelection from "../various/QuizSelection";
 
 const Quizzes = () => {
   const theme = useTheme();

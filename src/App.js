@@ -2,13 +2,13 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "./components/navigation/Header";
 import Home from "./components/pages/Home";
 import Quizzes from "./components/pages/Quizzes";
-import PlayingQuiz from "./components/quiz/PlayingQuiz";
+import PlayingQuiz from "./components/various/PlayingQuiz";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { checkLogin } from "./store/auth-slice";
 import Statistics from "./components/pages/Statistics";
-import ViewingQuiz from "./components/quiz/ViewingQuiz";
+import ViewingQuiz from "./components/various/ViewingQuiz";
 import "./body.css";
 
 const theme = createTheme({
