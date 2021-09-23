@@ -3,7 +3,7 @@ import { DataGrid, GridOverlay } from "@material-ui/data-grid";
 import { getQuizzes } from "../../store/quiz-table-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { quizTableActions } from "../../store/store";
-import { IconButton, LinearProgress, Tooltip } from "@material-ui/core";
+import { IconButton, LinearProgress, Tooltip, Paper } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { Search } from "@material-ui/icons";
 
@@ -62,7 +62,7 @@ const columns = [
         ". " +
         valueFormatted.getHours() +
         ":" +
-        valueFormatted.getMinutes()
+        (valueFormatted.getMinutes() < 10 ? "0" : "") + valueFormatted.getMinutes() 
       );
     },
   },
@@ -134,7 +134,7 @@ const UserQuizTable = () => {
   };
 
   return (
-    <div style={{ height: 370, width: "100%", marginTop: 10 }}>
+    <Paper style={{ height: 370, width: "100%", marginTop: 10, backgroundColor: "white" }}>
       <DataGrid
         rows={quizTableReducer.rows}
         columns={columns}
@@ -155,7 +155,7 @@ const UserQuizTable = () => {
           LoadingOverlay: CustomLoadingOverlay,
         }}
       />
-    </div>
+    </Paper>
   );
 };
 

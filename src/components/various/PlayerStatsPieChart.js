@@ -2,7 +2,7 @@ import { Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import { PieChart } from "react-minimal-pie-chart";
 import { useSelector } from "react-redux";
-import { pieColors } from "./pieColors";
+import { pieColors } from "../../utils/pie-colors";
 
 const PlayerStatsPieChart = (props) => {
   const userStatsReducer = useSelector((state) => state.userStatsReducer);

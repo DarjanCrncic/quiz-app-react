@@ -65,7 +65,7 @@ const quizSlice = createSlice({
       state.status = "playing";
       state.ongoing = true;
       state.currentQuestion = 0;
-      state.timer = Date.now() + 60000;
+      state.timer = Date.now() + payload.questions.length * 30 * 1000;
     },
     [getQuiz.rejected]: (state, action) => {
       state.status = "failed";

@@ -7,9 +7,26 @@ const Quizzes = () => {
   const theme = useTheme();
   return (
     <Container>
-      <Typography variant="h4" style={{color: theme.palette.primary.dark, textAlign: "center", marginTop: 20}}>Challenge Yourself And Start A New Quiz!</Typography>
+      <Typography
+        variant="h4"
+        style={{
+          color: theme.palette.primary.main,
+          textAlign: "center",
+          marginTop: 20,
+        }}
+      >
+        Challenge Yourself And Start A New Quiz!
+      </Typography>
       <QuizSelection />
-      <Typography variant="h5" style={{color: theme.palette.primary.dark}}>Your Quizzes:</Typography>
+      <Typography
+        variant="h5"
+        style={{
+          color: theme.palette.primary.main,
+          borderBottom: "3px solid " + theme.palette.primary.light,
+        }}
+      >
+        Your Quizzes:
+      </Typography>
       <UserQuizTable />
     </Container>
   );

@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
   loginButton: {
     padding: 10,
+    backgroundColor: "#4267b2"
   },
   facebookIcon: {
     marginRight: 10,

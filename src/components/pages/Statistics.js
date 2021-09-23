@@ -20,6 +20,10 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     margin: "auto",
   },
+  title: {
+    color: theme.palette.primary.main,
+    borderBottom: "3px solid " + theme.palette.primary.light
+  }
 }));
 
 
@@ -41,14 +45,14 @@ const Statistics = () => {
   return (
     <Grid container spacing={3} className={classes.container}>
       <Grid item xs={12} sm={6}>
-        <Typography variant="h3">
+        <Typography variant="h4" className={classes.title}>
           Most played category
         </Typography>
         <PlayerStatsPieChart setClickedCategory={setClickedCategory}/>
       </Grid>
       <Grid item xs={12} sm={6}>
-        <Typography variant="h3">
-          Average score per category:
+        <Typography variant="h4" className={classes.title}>
+          Average score per category
         </Typography>
         <AvgPerCatList selectedCategory={category}/> 
       </Grid>
