@@ -1,13 +1,15 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
-import Statistics from './Statistics';
+import React from "react";
+import { useSelector } from "react-redux";
+import Statistics from "./Statistics";
 
 const StatisticMain = () => {
   const authReducer = useSelector((state) => state.authReducer);
 
   return (
-    <Statistics id = {authReducer.principal.principal.id}/>
-  )
-}
+    authReducer.authenticated && (
+      <Statistics id={authReducer.principal.principal.id} />
+    )
+  );
+};
 
-export default StatisticMain
+export default StatisticMain;

@@ -57,7 +57,7 @@ function App() {
             path="/home"
             render={(props) => <Home {...props} />}
           ></Route>
-          {(authReducer.authenticated || authReducer.isLoading) && (
+          {(authReducer.authenticated || authReducer.isLoading) ? (
             <div>
               <Route
                 exact
@@ -90,7 +90,7 @@ function App() {
                 render={(props) => <Leaderboards {...props} />}
               ></Route>
             </div>
-          )}
+          ) : <Redirect to="/home" />}
           <Route path="*">
             <Redirect to="/home" />
           </Route>
