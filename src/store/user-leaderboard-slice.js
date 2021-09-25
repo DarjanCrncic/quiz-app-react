@@ -1,34 +1,33 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getStats = createAsyncThunk(
-  "quiz/getStats",
+export const getLeaderboard = createAsyncThunk(
+  "quiz/getLeaderboard",
   async (data) => {
-    console.log("getting stats...");
-    const userId = data;
+    console.log("getting leaderboard...");
     return axios
-      .get("/quiz/users/statistics/category/" + userId)
+      .get("/quiz/users/statistics/leaderboard")
       .then((response) => response.data);
   }
 );
 
-const userStatsSlice = createSlice({
+const userLeaderboardSlice = createSlice({
   name: "userStats",
   initialState: { data: [], status: null},
   reducers: {},
   extraReducers: {
-    [getStats.pending]: (state, action) => {
+    [getLeaderboard.pending]: (state, action) => {
       state.status = "loading";
     },
-    [getStats.fulfilled]: (state, { payload }) => {
+    [getLeaderboard.fulfilled]: (state, { payload }) => {
       state.data = payload;
       state.status = "success";
     },
-    [getStats.rejected]: (state, action) => {
+    [getLeaderboard.rejected]: (state, action) => {
       state.data = [];
       state.status = "failed";
     },
   },
 });
 
-export default userStatsSlice;
+export default userLeaderboardSlice;

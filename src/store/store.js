@@ -3,6 +3,7 @@ import authSlice from "./auth-slice";
 import friendsSlice from "./friends-slice";
 import quizSlice from "./quiz-slice";
 import quizTableSlice from "./quiz-table-slice";
+import userLeaderboardSlice from "./user-leaderboard-slice";
 import userStatsSlice from "./user-stats-slice";
 
 const store = configureStore({
@@ -12,6 +13,7 @@ const store = configureStore({
     quizTableReducer: quizTableSlice.reducer,
     friendsReducer: friendsSlice.reducer,
     userStatsReducer: userStatsSlice.reducer,
+    userLeaderboardReducer: userLeaderboardSlice.reducer,
   },
 });
 

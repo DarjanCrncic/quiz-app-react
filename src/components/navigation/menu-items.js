@@ -14,5 +14,10 @@ export const menuItems = [
     pageURL: "/statistics",
     needsAuth: true
   },
+  {
+    menuTitle: "Leaderboards",
+    pageURL: "/leaderboards",
+    needsAuth: true
+  },
 ];
 

@@ -1,22 +1,22 @@
 import {
   Avatar,
   Container,
+  Grow,
   IconButton,
   List,
   ListItem,
   ListItemAvatar,
   ListItemSecondaryAction,
   ListItemText,
-  Tooltip,
   makeStyles,
   Paper,
-  Grow,
+  Tooltip,
 } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getFriends } from "../../store/friends-slice";
+import { getLeaderboard } from "../../store/user-leaderboard-slice";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,47 +28,63 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FriendsList = () => {
+const calculatePlacementColor = (index) => {
+  if (index === 0) {
+    return "5px solid #FFD700"
+  } else if (index === 1) {
+    return "5px solid #C0C0C0"
+  } else if (index === 2) {
+    return "5px solid #CD7F32"
+  } else {
+    return ""
+  }
+}
+
+const LeaderboardList = () => {
   const classes = useStyles();
   const history = useHistory();
-  const friendsReducer = useSelector((state) => state.friendsReducer);
   const authReducer = useSelector((state) => state.authReducer);
+  const userLeaderboardReducer = useSelector(
+    (state) => state.userLeaderboardReducer
+  );
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (authReducer.authenticated) {
-      dispatch(getFriends());
+      dispatch(getLeaderboard());
     }
   }, [dispatch, authReducer.authenticated]);
 
   return (
     <Container className={classes.root}>
       <List>
-        {friendsReducer.friends.map((friend, i) => {
+        {userLeaderboardReducer.data.map((user, i) => {
           return (
             <Grow
               timeout={250 * (i + 1)}
               appear={true}
               in={true}
-              key={friend.dbId}
+              key={user.id}
               className={classes.listItem}
+              style={{border: calculatePlacementColor(i)}}
             >
               <Paper>
                 <ListItem>
                   <ListItemAvatar>
                     <Avatar>
-                      <img src={friend.picture.data.url} alt="" />
+                      <img src={user.image_url} alt="" />
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={friend.name} />
+                  <ListItemText primary={user.full_name} />
                   <ListItemText
                     primary={
                       "Average Score: " +
-                      (friend.average_score * 100).toFixed(2) +
+                      (user.avg_score * 100).toFixed(2) +
                       "%"
                     }
                   />
                   <ListItemSecondaryAction
-                    onClick={() => history.push("/statistics/" + friend.db_id)}
+                    onClick={() => history.push("/statistics/" + user.id)}
                   >
                     <Tooltip title="See statistics">
                       <IconButton edge="end">
@@ -86,4 +102,4 @@ const FriendsList = () => {
   );
 };
 
-export default FriendsList;
+export default LeaderboardList;

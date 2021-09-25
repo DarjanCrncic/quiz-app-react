@@ -7,9 +7,11 @@ import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { checkLogin } from "./store/auth-slice";
-import Statistics from "./components/pages/Statistics";
 import ViewingQuiz from "./components/various/ViewingQuiz";
 import "./body.css";
+import Leaderboards from "./components/pages/Leaderboards";
+import StatisticMain from "./components/pages/StatisticMain";
+import StatisticFriend from "./components/pages/StatisticFriend";
 
 const theme = createTheme({
   overrides: {
@@ -75,7 +77,17 @@ function App() {
               <Route
                 exact
                 path="/statistics"
-                render={(props) => <Statistics {...props} />}
+                render={(props) => <StatisticMain {...props} />}
+              ></Route>
+              <Route
+                exact
+                path="/statistics/:id"
+                render={(props) => <StatisticFriend {...props} />}
+              ></Route>
+              <Route
+                exact
+                path="/leaderboards"
+                render={(props) => <Leaderboards {...props} />}
               ></Route>
             </div>
           )}
