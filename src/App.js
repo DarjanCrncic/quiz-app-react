@@ -90,9 +90,9 @@ function App() {
                 render={(props) => <Leaderboards {...props} />}
               ></Route>
             </div>
-          ) : <Redirect to="/home" />}
+          ) : <Redirect to="/" />}
           <Route path="*">
-            <Redirect to="/home" />
+            <Redirect to="/" />
           </Route>
         </Switch>
       </ThemeProvider>
