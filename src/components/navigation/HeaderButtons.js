@@ -68,7 +68,7 @@ const HeaderButtons = (props) => {
         );
       })}
       {authReducer.authenticated && (
-        <form action={process.env.REACT_APP_BACKEND_URL + "/logout"}>
+        <form action={process.env.SPRING_APP_BACKEND_URL + "/logout"}>
           <button type="submit" className={classes.logoutButton}>
             <Typography variant="h6">Logout</Typography>
           </button>
