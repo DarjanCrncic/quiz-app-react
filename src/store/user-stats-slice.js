@@ -7,7 +7,7 @@ export const getStats = createAsyncThunk(
     console.log("getting stats...");
     const userId = data;
     return axios
-      .get("/quiz/users/statistics/category/" + userId)
+      .get("api/quiz/users/statistics/category/" + userId)
       .then((response) => response.data);
   }
 );

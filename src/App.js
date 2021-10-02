@@ -91,7 +91,9 @@ function App() {
               ></Route>
             </div>
           ) : <Redirect to="/" />}
-
+          <Route path="*">
+            <Redirect to="/" />
+          </Route>
         </Switch>
       </ThemeProvider>
     </div>

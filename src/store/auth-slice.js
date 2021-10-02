@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const checkLogin = createAsyncThunk("auth/checkLogin", async (data) => {
   console.log("checking logging in...");
-  return axios.get("/users/authenticated").then((response) => response.data);
+  return axios.get("api/users/authenticated").then((response) => response.data);
 });
 
 const authSlice = createSlice({

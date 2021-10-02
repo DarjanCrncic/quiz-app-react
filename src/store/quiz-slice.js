@@ -4,7 +4,7 @@ import axios from "axios";
 export const getQuiz = createAsyncThunk("quiz/getQuiz", async (data) => {
   console.log("getting new quiz...");
   return axios
-    .get("/quiz/", {
+    .get("api/quiz/", {
       params: {
         category: data.category,
         difficulty: data.difficulty,
@@ -15,7 +15,7 @@ export const getQuiz = createAsyncThunk("quiz/getQuiz", async (data) => {
 });
 
 export const submitUserAnswers = createAsyncThunk(
-  "quiz/submitUserAnswers",
+  "api/quiz/submitUserAnswers",
   async (data, { getState }) => {
     console.log("submitting answers...");
     return axios
