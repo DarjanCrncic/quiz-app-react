@@ -3,7 +3,14 @@
   "homepage": ".",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080",
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:8000",
+      "pathRewrite": {
+        "^/api": "/"
+      }
+    }
+  },
   "dependencies": {
     "@material-ui/core": "^4.12.2",
     "@material-ui/data-grid": "^4.0.0-alpha.37",
