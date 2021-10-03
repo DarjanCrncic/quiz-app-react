@@ -6,7 +6,7 @@
   "https_only": true,
   "proxies": {
     "/api/": {
-      "origin": "${SPRING_APP_BACKEND_URL}"
+      "origin": "${API_URL}"
     }
   }
 }
