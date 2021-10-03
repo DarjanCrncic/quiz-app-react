@@ -28,7 +28,7 @@ const Home = () => {
       <Container>
         <form
           action={
-            process.env.SPRING_APP_BACKEND_URL + "/oauth2/authorization/facebook"
+            "/api/oauth2/authorization/facebook"
           }
           className={classes.wrapper}
         >
