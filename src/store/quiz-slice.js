@@ -15,11 +15,11 @@ export const getQuiz = createAsyncThunk("quiz/getQuiz", async (data) => {
 });
 
 export const submitUserAnswers = createAsyncThunk(
-  "api/quiz/submitUserAnswers",
+  "quiz/submitUserAnswers",
   async (data, { getState }) => {
     console.log("submitting answers...");
     return axios
-      .post("/quiz/", getState().quizReducer.quiz)
+      .post("/api/quiz/", getState().quizReducer.quiz)
       .then((response) => response.status);
   }
 );

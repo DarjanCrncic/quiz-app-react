@@ -12,7 +12,7 @@ export const getQuizzes = createAsyncThunk(
     console.log("should get");
     return axios
       .get(
-        "api/quiz/users/" +
+        "/api/quiz/users/" +
           userId +
           "?per_page=" +
           per_page +

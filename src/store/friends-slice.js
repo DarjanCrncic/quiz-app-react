@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getFriends = createAsyncThunk("user/getFriends", async (data) => {
   console.log("getting friends...");
-  return axios.get("api/users/friends").then((response) => response.data);
+  return axios.get("/api/users/friends").then((response) => response.data);
 });
 
 const friendsSlice = createSlice({
