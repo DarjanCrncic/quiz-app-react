@@ -1,7 +1,6 @@
 import { CircularProgress, Grid, makeStyles, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { checkLogin } from "../../store/auth-slice";
 import { getStats } from "../../store/user-stats-slice";
 import AvgPerCatList from "../various/AvgPerCatList";
 import PlayerStatsPieChart from "../various/PlayerStatsPieChart";
