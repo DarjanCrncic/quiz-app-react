@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+require('dotenv').config();
 
 export const getLeaderboard = createAsyncThunk(
   "quiz/getLeaderboard",
   async (data) => {
     console.log("getting leaderboard...");
     return axios
-      .get("/api/quiz/users/statistics/leaderboard")
+      .get(process.env.REACT_APP_API_URL + "/quiz/users/statistics/leaderboard")
       .then((response) => response.data);
   }
 );

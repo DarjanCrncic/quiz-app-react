@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+require('dotenv').config();
 
 export const getStats = createAsyncThunk(
   "quiz/getStats",
@@ -7,7 +8,7 @@ export const getStats = createAsyncThunk(
     console.log("getting stats...");
     const userId = data;
     return axios
-      .get("/api/quiz/users/statistics/category/" + userId)
+      .get(process.env.REACT_APP_API_URL + "/quiz/users/statistics/category/" + userId)
       .then((response) => response.data);
   }
 );

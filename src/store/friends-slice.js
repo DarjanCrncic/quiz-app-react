@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+require('dotenv').config();
 
 export const getFriends = createAsyncThunk("user/getFriends", async (data) => {
   console.log("getting friends...");
-  return axios.get("/api/users/friends").then((response) => response.data);
+  return axios.get(process.env.REACT_APP_API_URL + "/users/friends").then((response) => response.data);
 });
 
 const friendsSlice = createSlice({

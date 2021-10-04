@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+require('dotenv').config();
 
 export const getQuiz = createAsyncThunk("quiz/getQuiz", async (data) => {
   console.log("getting new quiz...");
   return axios
-    .get("api/quiz/", {
+    .get(process.env.REACT_APP_API_URL + "/quiz/", {
       params: {
         category: data.category,
         difficulty: data.difficulty,
@@ -19,7 +20,7 @@ export const submitUserAnswers = createAsyncThunk(
   async (data, { getState }) => {
     console.log("submitting answers...");
     return axios
-      .post("/api/quiz/", getState().quizReducer.quiz)
+      .post(process.env.REACT_APP_API_URL + "/quiz/", getState().quizReducer.quiz)
       .then((response) => response.status);
   }
 );

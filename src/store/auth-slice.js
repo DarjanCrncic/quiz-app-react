@@ -4,7 +4,7 @@ require('dotenv').config();
 
 export const checkLogin = createAsyncThunk("auth/checkLogin", async (data) => {
   console.log("checking logging in...");
-  return axios.get(process.env.REACT_APP_API_URL + "/api/users/authenticated").then((response) => response.data);
+  return axios.get(process.env.REACT_APP_API_URL + "/users/authenticated").then((response) => response.data);
 });
 
 const authSlice = createSlice({
