@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+require('dotenv').config();
 
 export const checkLogin = createAsyncThunk("auth/checkLogin", async (data) => {
   console.log("checking logging in...");
