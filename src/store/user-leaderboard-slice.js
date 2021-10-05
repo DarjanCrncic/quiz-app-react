@@ -7,7 +7,7 @@ export const getLeaderboard = createAsyncThunk(
   async (data) => {
     console.log("getting leaderboard...");
     return axios
-      .get(process.env.REACT_APP_API_URL + "/quiz/users/statistics/leaderboard")
+      .get("/api/quiz/users/statistics/leaderboard")
       .then((response) => response.data);
   }
 );

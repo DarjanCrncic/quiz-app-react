@@ -92,7 +92,7 @@ function App() {
             </div>
           ) : <Redirect to="/" />}
           <Route path="*">
-            <Redirect to="/" />
+            <Redirect to="/home" />
           </Route>
         </Switch>
       </ThemeProvider>

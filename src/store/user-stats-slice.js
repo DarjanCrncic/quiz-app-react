@@ -8,7 +8,7 @@ export const getStats = createAsyncThunk(
     console.log("getting stats...");
     const userId = data;
     return axios
-      .get(process.env.REACT_APP_API_URL + "/quiz/users/statistics/category/" + userId)
+      .get("/api/quiz/users/statistics/category/" + userId)
       .then((response) => response.data);
   }
 );

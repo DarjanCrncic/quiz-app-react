@@ -5,7 +5,7 @@ require('dotenv').config();
 export const getQuiz = createAsyncThunk("quiz/getQuiz", async (data) => {
   console.log("getting new quiz...");
   return axios
-    .get(process.env.REACT_APP_API_URL + "/quiz/", {
+    .get("/api/quiz/", {
       params: {
         category: data.category,
         difficulty: data.difficulty,
@@ -20,7 +20,7 @@ export const submitUserAnswers = createAsyncThunk(
   async (data, { getState }) => {
     console.log("submitting answers...");
     return axios
-      .post(process.env.REACT_APP_API_URL + "/quiz/", getState().quizReducer.quiz)
+      .post("/api/quiz/", getState().quizReducer.quiz)
       .then((response) => response.status);
   }
 );

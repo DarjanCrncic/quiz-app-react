@@ -64,7 +64,7 @@ const HomePageIntro = (props) => {
               {props.children}
             </Typography>
           </Grid>
-          <Grid item sm={0} md={4} className={classes.whiteDivHolder}>
+          <Grid item sm={false} md={4} className={classes.whiteDivHolder}>
             <div className={classes.divTop + " " + classes.WhiteDiv}><div className={classes.innerTriangle}></div></div>
             <div className={classes.divMiddle + " " + classes.WhiteDiv}><div className={classes.innerTriangle}></div></div>
             <div className={classes.divBottom + " " + classes.WhiteDiv}><div className={classes.innerTriangle}></div></div>

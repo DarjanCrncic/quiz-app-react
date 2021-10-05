@@ -3,6 +3,7 @@ import { Button, Container, Typography } from "@material-ui/core";
 import { Facebook } from "@material-ui/icons";
 import React from "react";
 import HomePageIntro from "../various/HomePageIntro";
+require('dotenv').config();
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -28,7 +29,7 @@ const Home = () => {
       <Container>
         <form
           action={
-            "/api/oauth2/authorization/facebook"
+            "api/oauth2/authorization/facebook"
           }
           className={classes.wrapper}
         >
