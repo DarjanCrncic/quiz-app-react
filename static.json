@@ -4,8 +4,8 @@
     "/**": "index.html"
   },
   "proxies": {
-    "/api/": {
-      "origin": "${API_URL}"
+    "https://quiz-app-spring.herokuapp.com/": {
+      "origin": "https://quiz-app-spring.herokuapp.com/"
     }
   }
 }
