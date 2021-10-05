@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-require('dotenv').config();
 
 export const getQuiz = createAsyncThunk("quiz/getQuiz", async (data) => {
   console.log("getting new quiz...");
