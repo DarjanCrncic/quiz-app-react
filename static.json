@@ -6,7 +6,7 @@
   "proxies": {
     "proxies": {
       "/api/": {
-        "origin": "${REACT_APP_API_URL}"
+        "origin": "https://quiz-app-spring.herokuapp.com/"
       }
     }
   }
