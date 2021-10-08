@@ -42,6 +42,7 @@ function App() {
 
   useEffect(() => {
     dispatch(checkLogin());
+    console.log(window.sessionStorage["fbssls_" + process.env.REACT_APP_FACEBOOK_CLIENT_ID]);
   }, [dispatch]);
 
   return (

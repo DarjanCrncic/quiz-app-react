@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => {
-  console.log(theme);
   return {
     headerOptions: {
       display: "flex",
@@ -49,6 +48,11 @@ const HeaderButtons = (props) => {
   const classes = useStyles();
   const authReducer = useSelector((state) => state.authReducer);
 
+  const handleLogout = () => {
+    window.FB.logout(function(response) {
+    });
+  }
+
   return (
     <div className={classes.headerOptions}>
       {props.menuItems.map((menuItem) => {
@@ -74,6 +78,7 @@ const HeaderButtons = (props) => {
           </button>
         </form>
       )}
+      <button onClick={handleLogout}>Logof</button>
     </div>
   );
 };

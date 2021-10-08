@@ -3,7 +3,7 @@ import { Button, Container, Typography } from "@material-ui/core";
 import { Facebook } from "@material-ui/icons";
 import React from "react";
 import HomePageIntro from "../various/HomePageIntro";
-require('dotenv').config();
+require("dotenv").config();
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
   loginButton: {
     padding: 10,
-    backgroundColor: "#4267b2"
+    backgroundColor: "#4267b2",
   },
   facebookIcon: {
     marginRight: 10,
@@ -25,12 +25,12 @@ const Home = () => {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <HomePageIntro>Test Your Knowledge In The Ultimate Quiz Application!</HomePageIntro>
+      <HomePageIntro>
+        Test Your Knowledge In The Ultimate Quiz Application!
+      </HomePageIntro>
       <Container>
         <form
-          action={
-            "api/oauth2/authorization/facebook"
-          }
+          action={"api/oauth2/authorization/facebook"}
           className={classes.wrapper}
         >
           <Button
@@ -41,6 +41,16 @@ const Home = () => {
           >
             <Facebook className={classes.facebookIcon} />
             <Typography variant="h4">Log In With Facebook</Typography>
+            <div
+              className="fb-login-button"
+              data-width=""
+              data-size="large"
+              data-button-type="continue_with"
+              data-layout="default"
+              data-auto-logout-link="false"
+              data-use-continue-as="false"
+              data-onlogin="checkLoginState()"
+            ></div>
           </Button>
         </form>
       </Container>
