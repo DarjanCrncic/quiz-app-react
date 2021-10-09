@@ -5,13 +5,14 @@ import Quizzes from "./components/pages/Quizzes";
 import PlayingQuiz from "./components/various/PlayingQuiz";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { checkLogin } from "./store/auth-slice";
 import ViewingQuiz from "./components/various/ViewingQuiz";
 import "./body.css";
 import Leaderboards from "./components/pages/Leaderboards";
 import StatisticMain from "./components/pages/StatisticMain";
 import StatisticFriend from "./components/pages/StatisticFriend";
+import { checkLoginState } from "./utils/_auth-helpers";
+import { apiAuthLogin } from "./store/auth-slice";
+import { useEffect } from "react";
 
 const theme = createTheme({
   overrides: {
@@ -37,14 +38,16 @@ const theme = createTheme({
 });
 
 function App() {
-  const dispatch = useDispatch();
   const authReducer = useSelector((state) => state.authReducer);
-
+  const dispatch = useDispatch();
+  
   useEffect(() => {
-    dispatch(checkLogin());
-    console.log(window.sessionStorage["fbssls_" + process.env.REACT_APP_FACEBOOK_CLIENT_ID]);
-  }, [dispatch]);
-
+    const tryFunctionPass = (response) => {
+      dispatch(apiAuthLogin(response));
+    }
+    checkLoginState(tryFunctionPass);  
+  }, [dispatch])
+  
   return (
     <div>
       <ThemeProvider theme={theme}>
@@ -58,7 +61,7 @@ function App() {
             path="/home"
             render={(props) => <Home {...props} />}
           ></Route>
-          {(authReducer.authenticated || authReducer.isLoading) ? (
+          {authReducer.authenticated || authReducer.isLoading ? (
             <div>
               <Route
                 exact
@@ -91,7 +94,9 @@ function App() {
                 render={(props) => <Leaderboards {...props} />}
               ></Route>
             </div>
-          ) : <Redirect to="/" />}
+          ) : (
+            <Redirect to="/" />
+          )}
           <Route path="*">
             <Redirect to="/home" />
           </Route>

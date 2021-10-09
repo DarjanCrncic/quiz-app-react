@@ -1,10 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const checkLogin = createAsyncThunk("auth/checkLogin", async (data) => {
-  console.log("checking logging in...");
-  return axios.get("/api/users/authenticated").then((response) => response.data);
-});
+export const apiAuthLogin = createAsyncThunk(
+  "auth/checkLogin",
+  async (data) => {
+    console.log("checking logging in...");
+    console.log("facebook data: ", data);
+    return axios
+      .post("/api/login", data.authResponse)
+      .then((response) => response.data);
+  }
+);
 
 const authSlice = createSlice({
   name: "auth",
@@ -23,19 +29,19 @@ const authSlice = createSlice({
     },
   },
   extraReducers: {
-    [checkLogin.pending]: (state, action) => {
+    [apiAuthLogin.pending]: (state, action) => {
       state.status = "loading";
       state.isLoading = true;
     },
-    [checkLogin.fulfilled]: (state, { payload }) => {
+    [apiAuthLogin.fulfilled]: (state, { payload }) => {
       state.principal = payload;
       if (payload !== null && payload !== "") {
         state.status = "authenticated";
-        state.authenticated = true;  
+        state.authenticated = true;
       }
       state.isLoading = false;
     },
-    [checkLogin.rejected]: (state, action) => {
+    [apiAuthLogin.rejected]: (state, action) => {
       state.principal = null;
       state.authenticated = false;
       state.isLoading = false;

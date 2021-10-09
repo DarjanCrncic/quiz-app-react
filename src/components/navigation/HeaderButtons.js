@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { logout } from "../../utils/_auth-helpers";
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -38,8 +39,7 @@ const useStyles = makeStyles((theme) => {
       },
       padding: "none",
       border: "none",
-      marginTop: -1
-
+      marginTop: -1,
     },
   };
 });
@@ -47,11 +47,6 @@ const useStyles = makeStyles((theme) => {
 const HeaderButtons = (props) => {
   const classes = useStyles();
   const authReducer = useSelector((state) => state.authReducer);
-
-  const handleLogout = () => {
-    window.FB.logout(function(response) {
-    });
-  }
 
   return (
     <div className={classes.headerOptions}>
@@ -72,13 +67,10 @@ const HeaderButtons = (props) => {
         );
       })}
       {authReducer.authenticated && (
-        <form action={"/api/logout"}>
-          <button type="submit" className={classes.logoutButton}>
-            <Typography variant="h6">Logout</Typography>
-          </button>
-        </form>
+        <button onClick={logout} className={classes.logoutButton}>
+          <Typography variant="h6">Logout</Typography>
+        </button>
       )}
-      <button onClick={handleLogout}>Logof</button>
     </div>
   );
 };
