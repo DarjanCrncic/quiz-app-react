@@ -3,14 +3,12 @@ import { Button, Container, Typography } from "@material-ui/core";
 import { Facebook } from "@material-ui/icons";
 import React from "react";
 import HomePageIntro from "../various/HomePageIntro";
+import { facebookLogin } from "../../utils/_auth-helpers";
+import { useDispatch, useSelector } from "react-redux";
+import { apiAuthLogin } from "../../store/auth-slice";
 require("dotenv").config();
 
 const useStyles = makeStyles((theme) => ({
-  wrapper: {
-    textAlign: "center",
-    margin: 30,
-    color: theme.palette.primary.dark,
-  },
   loginButton: {
     padding: 10,
     backgroundColor: "#4267b2",
@@ -23,36 +21,34 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const authReducer = useSelector((state) => state.authReducer);
+
+  const handleOnFacebookButtonClick = () => {
+    const successfulFacebookTokenRetrieval = (response) => {
+      dispatch(apiAuthLogin(response));
+    };
+    facebookLogin(successfulFacebookTokenRetrieval);
+  };
+
   return (
     <React.Fragment>
       <HomePageIntro>
         Test Your Knowledge In The Ultimate Quiz Application!
       </HomePageIntro>
-      <Container>
-        <form
-          action={"api/oauth2/authorization/facebook"}
-          className={classes.wrapper}
-        >
+      <Container style={{ textAlign: "center" }}>
+        {!authReducer.authenticated && (
           <Button
             type="submit"
             variant="contained"
             color="primary"
             className={classes.loginButton}
+            onClick={handleOnFacebookButtonClick}
           >
             <Facebook className={classes.facebookIcon} />
             <Typography variant="h4">Log In With Facebook</Typography>
-            <div
-              className="fb-login-button"
-              data-width=""
-              data-size="large"
-              data-button-type="continue_with"
-              data-layout="default"
-              data-auto-logout-link="false"
-              data-use-continue-as="false"
-              data-onlogin="checkLoginState()"
-            ></div>
           </Button>
-        </form>
+        )}
       </Container>
     </React.Fragment>
   );

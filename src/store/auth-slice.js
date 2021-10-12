@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 export const apiAuthLogin = createAsyncThunk(
   "auth/checkLogin",
@@ -15,6 +16,7 @@ export const apiAuthLogin = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState: {
+    jwtToken: null,
     authenticated: false,
     status: null,
     principal: null,
@@ -26,6 +28,9 @@ const authSlice = createSlice({
     },
     logout(state) {
       state.authenticated = false;
+      state.jwtToken = null;
+      state.status = null;
+      state.principal = null;
     },
   },
   extraReducers: {
@@ -34,7 +39,8 @@ const authSlice = createSlice({
       state.isLoading = true;
     },
     [apiAuthLogin.fulfilled]: (state, { payload }) => {
-      state.principal = payload;
+      state.jwtToken = payload;
+      state.principal = jwt_decode(payload);
       if (payload !== null && payload !== "") {
         state.status = "authenticated";
         state.authenticated = true;

@@ -22,6 +22,17 @@ export function initFacebookSdk() {
   });
 }
 
+export const facebookLogin = (callback) => {
+  window.FB.login(function (response) {
+    if (response.status === "connected") {
+      statusChangeCallback(response, callback);
+    } else {
+      // The person is not logged into your webpage or we are unable to tell.
+      console.log("failed log in...");
+    }
+  });
+};
+
 export const testAPI = () => {
   // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
   console.log("Welcome!  Fetching your information.... ");
@@ -44,8 +55,10 @@ export const statusChangeCallback = (response, callback) => {
   if (response.status === "connected") {
     // Logged into your webpage and Facebook.
     testAPI();
+    if (callback !== undefined && callback !== null) {
+      callback(response);
+    }
   }
-  callback(response);
 };
 
 export const logout = () => {

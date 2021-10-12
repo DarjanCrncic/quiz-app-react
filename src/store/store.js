@@ -19,5 +19,6 @@ const store = configureStore({
 
 export const quizActions = quizSlice.actions;
 export const quizTableActions = quizTableSlice.actions;
+export const authActions = authSlice.actions;
 
 export default store;

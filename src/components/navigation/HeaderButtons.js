@@ -2,8 +2,9 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../utils/_auth-helpers";
+import { authActions } from "../../store/store";
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -47,6 +48,12 @@ const useStyles = makeStyles((theme) => {
 const HeaderButtons = (props) => {
   const classes = useStyles();
   const authReducer = useSelector((state) => state.authReducer);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    logout();
+    dispatch(authActions.logout());
+  };
 
   return (
     <div className={classes.headerOptions}>
@@ -67,7 +74,7 @@ const HeaderButtons = (props) => {
         );
       })}
       {authReducer.authenticated && (
-        <button onClick={logout} className={classes.logoutButton}>
+        <button onClick={handleLogout} className={classes.logoutButton}>
           <Typography variant="h6">Logout</Typography>
         </button>
       )}

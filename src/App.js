@@ -42,10 +42,10 @@ function App() {
   const dispatch = useDispatch();
   
   useEffect(() => {
-    const tryFunctionPass = (response) => {
+    const successfulFacebookTokenRetrieval = (response) => {
       dispatch(apiAuthLogin(response));
     }
-    checkLoginState(tryFunctionPass);  
+    checkLoginState(successfulFacebookTokenRetrieval);  
   }, [dispatch])
   
   return (
