@@ -45,40 +45,44 @@ const FriendsList = () => {
       <List>
         {friendsReducer.friends.map((friend, i) => {
           return (
-            <Grow
-              timeout={250 * (i + 1)}
-              appear={true}
-              in={true}
-              key={i}
-              className={classes.listItem}
-            >
-              <Paper>
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <img src={friend.picture.data.url} alt="" />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary={friend.name} />
-                  <ListItemText
-                    primary={
-                      "Average Score: " +
-                      (friend.average_score * 100).toFixed(2) +
-                      "%"
-                    }
-                  />
-                  <ListItemSecondaryAction
-                    onClick={() => history.push("/statistics/" + friend.db_id)}
-                  >
-                    <Tooltip title="See statistics">
-                      <IconButton edge="end">
-                        <Search />
-                      </IconButton>
-                    </Tooltip>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              </Paper>
-            </Grow>
+            <React.Fragment key={i}>
+              <Grow
+                timeout={250 * (i + 1)}
+                appear={true}
+                in={true}
+                key={i}
+                className={classes.listItem}
+              >
+                <Paper>
+                  <ListItem>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <img src={friend.picture.data.url} alt="" />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary={friend.name} />
+                    <ListItemText
+                      primary={
+                        "Average Score: " +
+                        (friend.average_score * 100).toFixed(2) +
+                        "%"
+                      }
+                    />
+                    <ListItemSecondaryAction
+                      onClick={() =>
+                        history.push("/statistics/" + friend.db_id)
+                      }
+                    >
+                      <Tooltip title="See statistics">
+                        <IconButton edge="end">
+                          <Search />
+                        </IconButton>
+                      </Tooltip>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </Paper>
+              </Grow>
+            </React.Fragment>
           );
         })}
       </List>

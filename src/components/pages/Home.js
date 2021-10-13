@@ -37,7 +37,7 @@ const Home = () => {
         Test Your Knowledge In The Ultimate Quiz Application!
       </HomePageIntro>
       <Container style={{ textAlign: "center" }}>
-        {!authReducer.authenticated && (
+        {!authReducer.authenticated ? (
           <Button
             type="submit"
             variant="contained"
@@ -48,7 +48,7 @@ const Home = () => {
             <Facebook className={classes.facebookIcon} />
             <Typography variant="h4">Log In With Facebook</Typography>
           </Button>
-        )}
+        ) : <Typography variant="h3" color="primary">Welcome!</Typography>}
       </Container>
     </React.Fragment>
   );

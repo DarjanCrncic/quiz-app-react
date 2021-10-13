@@ -30,15 +30,15 @@ const useStyles = makeStyles((theme) => ({
 
 const calculatePlacementColor = (index) => {
   if (index === 0) {
-    return "5px solid #FFD700"
+    return "5px solid #FFD700";
   } else if (index === 1) {
-    return "5px solid #C0C0C0"
+    return "5px solid #C0C0C0";
   } else if (index === 2) {
-    return "5px solid #CD7F32"
+    return "5px solid #CD7F32";
   } else {
-    return ""
+    return "";
   }
-}
+};
 
 const LeaderboardList = () => {
   const classes = useStyles();
@@ -60,41 +60,43 @@ const LeaderboardList = () => {
       <List>
         {userLeaderboardReducer.data.map((user, i) => {
           return (
-            <Grow
-              timeout={250 * (i + 1)}
-              appear={true}
-              in={true}
-              key={user.id}
-              className={classes.listItem}
-              style={{border: calculatePlacementColor(i)}}
-            >
-              <Paper>
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <img src={user.image_url} alt="" />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary={user.full_name} />
-                  <ListItemText
-                    primary={
-                      "Average Score: " +
-                      (user.avg_score * 100).toFixed(2) +
-                      "%"
-                    }
-                  />
-                  <ListItemSecondaryAction
-                    onClick={() => history.push("/statistics/" + user.id)}
-                  >
-                    <Tooltip title="See statistics">
-                      <IconButton edge="end">
-                        <Search />
-                      </IconButton>
-                    </Tooltip>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              </Paper>
-            </Grow>
+            <React.Fragment key={i}>
+              <Grow
+                timeout={250 * (i + 1)}
+                appear={true}
+                in={true}
+                key={user.id}
+                className={classes.listItem}
+                style={{ border: calculatePlacementColor(i) }}
+              >
+                <Paper>
+                  <ListItem>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <img src={user.image_url} alt="" />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary={user.full_name} />
+                    <ListItemText
+                      primary={
+                        "Average Score: " +
+                        (user.avg_score * 100).toFixed(2) +
+                        "%"
+                      }
+                    />
+                    <ListItemSecondaryAction
+                      onClick={() => history.push("/statistics/" + user.id)}
+                    >
+                      <Tooltip title="See statistics">
+                        <IconButton edge="end">
+                          <Search />
+                        </IconButton>
+                      </Tooltip>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </Paper>
+              </Grow>
+            </React.Fragment>
           );
         })}
       </List>
