@@ -54,7 +54,6 @@ export const statusChangeCallback = (response, callback) => {
   console.log("statusChangeCallback");
   if (response.status === "connected") {
     // Logged into your webpage and Facebook.
-    testAPI();
     if (callback !== undefined && callback !== null) {
       callback(response);
     }

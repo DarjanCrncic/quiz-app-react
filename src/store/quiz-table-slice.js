@@ -8,7 +8,7 @@ export const getQuizzes = createAsyncThunk(
     const page = getState().quizTableReducer.page;
     const order = getState().quizTableReducer.sortModel[0].field;
     const orderBy = getState().quizTableReducer.sortModel[0].sort;
-    const userId = getState().authReducer.principal.principal.id;
+    const userId = getState().authReducer.principal.userId;
     console.log("should get");
     return axios
       .get(

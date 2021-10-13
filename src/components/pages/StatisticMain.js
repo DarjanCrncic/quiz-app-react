@@ -7,7 +7,7 @@ const StatisticMain = () => {
 
   return (
     authReducer.authenticated && (
-      <Statistics id={authReducer.principal.principal.id} />
+      <Statistics id={authReducer.principal.userId} />
     )
   );
 };

@@ -49,7 +49,7 @@ const FriendsList = () => {
               timeout={250 * (i + 1)}
               appear={true}
               in={true}
-              key={friend.i}
+              key={i}
               className={classes.listItem}
             >
               <Paper>
