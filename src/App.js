@@ -50,7 +50,6 @@ function App() {
     const successfulFacebookTokenRetrieval = (response) => {
       dispatch(apiAuthLogin(response));
     }
-    window.FB = undefined;
     if (window.FB !== undefined) {
       checkLoginState(successfulFacebookTokenRetrieval);  
     } else {
