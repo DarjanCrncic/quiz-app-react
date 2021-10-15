@@ -59,6 +59,8 @@ export const statusChangeCallback = (response, callback) => {
     if (callback !== undefined && callback !== null) {
       callback(response);
     }
+  } else {
+    facebookLogin(callback);
   }
 };
 
