@@ -12,7 +12,8 @@ import StatisticMain from "./components/pages/StatisticMain";
 import StatisticFriend from "./components/pages/StatisticFriend";
 import { checkLoginState } from "./utils/_auth-helpers";
 import { apiAuthLogin } from "./store/auth-slice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import BasicModal from "./utils/BasicModal";
 
 const theme = createTheme({
   overrides: {
@@ -41,17 +42,27 @@ function App() {
   const authReducer = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
   
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleClose = () => setModalOpen(false);
+
+  
   useEffect(() => {
     const successfulFacebookTokenRetrieval = (response) => {
       dispatch(apiAuthLogin(response));
     }
-    checkLoginState(successfulFacebookTokenRetrieval);  
+    window.FB = undefined;
+    if (window.FB !== undefined) {
+      checkLoginState(successfulFacebookTokenRetrieval);  
+    } else {
+      setModalOpen(true);
+    }
   }, [dispatch])
   
   return (
     <div>
       <ThemeProvider theme={theme}>
         <Header />
+        <BasicModal handleClose = {handleClose} open = {modalOpen} />
         <Switch>
           <Route exact from="/">
             <Redirect to="/home" />

@@ -3,7 +3,7 @@ import { Button, Container, Typography } from "@material-ui/core";
 import { Facebook } from "@material-ui/icons";
 import React from "react";
 import HomePageIntro from "../various/HomePageIntro";
-import { facebookLogin } from "../../utils/_auth-helpers";
+import { checkLoginState, facebookLogin } from "../../utils/_auth-helpers";
 import { useDispatch, useSelector } from "react-redux";
 import { apiAuthLogin } from "../../store/auth-slice";
 require("dotenv").config();
@@ -28,7 +28,11 @@ const Home = () => {
     const successfulFacebookTokenRetrieval = (response) => {
       dispatch(apiAuthLogin(response));
     };
-    facebookLogin(successfulFacebookTokenRetrieval);
+    if (!authReducer.authenticated) {
+      facebookLogin(successfulFacebookTokenRetrieval);
+    } else {
+      checkLoginState(successfulFacebookTokenRetrieval);
+    }
   };
 
   return (
