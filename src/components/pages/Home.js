@@ -6,6 +6,7 @@ import HomePageIntro from "../various/HomePageIntro";
 import { checkLoginState } from "../../utils/_auth-helpers";
 import { useDispatch, useSelector } from "react-redux";
 import { apiAuthLogin } from "../../store/auth-slice";
+import Footer from "../various/Footer";
 require("dotenv").config();
 
 const useStyles = makeStyles((theme) => ({
@@ -53,6 +54,7 @@ const Home = () => {
             Welcome!
           </Typography>
         )}
+        <Footer />
       </Container>
     </React.Fragment>
   );
